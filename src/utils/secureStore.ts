@@ -20,17 +20,21 @@ export async function setStorageItemAsync(key: string, value: string | null) {
     if (localStorage) {
       if (value === null) {
         localStorage.removeItem(key);
+        return Promise.reject();
       } else {
         localStorage.setItem(key, value);
+        return Promise.resolve();
       }
     } else {
-      return null;
+      return Promise.reject();
     }
   } else {
     if (value == null) {
       await SecureStore.deleteItemAsync(key);
+      return Promise.reject();
     } else {
       await SecureStore.setItemAsync(key, value);
+      return Promise.resolve();
     }
   }
 }
@@ -42,8 +46,10 @@ export async function deleteStorageItemAsync(key: string) {
   if (isWeb) {
     if (!localStorage) return null;
     localStorage.removeItem(key);
+    return Promise.resolve();
   } else {
     await SecureStore.deleteItemAsync(key);
+    return Promise.resolve();
   }
 }
 
@@ -55,5 +61,6 @@ export async function deleteAllStorageItemAsync() {
   if (isWeb) {
     if (!localStorage) return null;
     localStorage.clear();
+    return Promise.resolve();
   }
 }

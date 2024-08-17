@@ -1,11 +1,10 @@
 import {
   Text,
   StyleSheet,
-  View,
   Image,
   type ImageSourcePropType,
 } from "react-native";
-import { Grid, List } from "@ant-design/react-native";
+import { Grid, List, View, Toast } from "@ant-design/react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link, router } from "expo-router";
 import { useUserStore } from "@/src/store/index";
@@ -16,24 +15,32 @@ import type { DataItem } from "@ant-design/react-native/lib/grid/PropsType";
 
 export default function MineScreen() {
   const { avatar, name } = useUserStore();
+
   // const [] = useState<String>("");
   return (
     <View style={styles.container}>
       {/* 顶部个人信息栏 */}
       <View style={styles.headerSection}>
         <View style={styles.headerLeft}>
-          <Image
-            style={styles.avatar}
-            source={avatar as ImageSourcePropType}
-          ></Image>
+          {/* 头像 */}
+          <Link href="/mine/avatar">
+            {/* 必须加层View */}
+            <View style={styles.avatarBox}>
+              <Image
+                style={styles.avatar}
+                source={avatar as ImageSourcePropType}
+              ></Image>
+            </View>
+          </Link>
+
           <Text style={styles.headerLeftText}>用户名: {name}</Text>
         </View>
         <View style={styles.headerRight}>
-          <Link href={"/mine"}>
-            <Text style={styles.headerRightText}>个人信息 </Text>
-          </Link>
-          <Link href={"/mine"}>
-            <AntDesign name="right" size={16} color="white" />
+          <Link href={"/mine/info"}>
+            <View style={styles.headerRight}>
+              <Text style={styles.headerRightText}>个人信息 </Text>
+              <AntDesign name="right" size={16} color="white" />
+            </View>
           </Link>
         </View>
       </View>
@@ -57,27 +64,36 @@ const MineActions = () => {
     {
       icon: <FontAwesome name="users" size={24} color="red" />,
       text: "交流群",
-      path: void 0,
+      msg: "QQ群: 999999999",
     },
     {
       icon: <AntDesign name="customerservice" size={24} color="blue" />,
       text: "在线客服",
-      path: void 0,
+      msg: "模块建设中...",
     },
     {
       icon: <Entypo name="chat" size={24} color="#9c26b0" />,
       text: "反馈社区",
-      path: void 0,
+      msg: "模块建设中...",
     },
     {
       icon: <AntDesign name="like2" size={24} color="#39b54a" />,
       text: "点赞我们",
-      path: void 0,
+      msg: "模块建设中...",
     },
   ];
+  // 宫格点击事件
+  const gridClick = (el: DataItem | undefined, index?: number | undefined) => {
+    Toast.info(el!.msg);
+  };
   return (
     <View style={styles.mineActions}>
-      <Grid data={gridData} hasLine={false}></Grid>
+      <Grid
+        data={gridData}
+        columnNum={4}
+        hasLine={false}
+        onPress={gridClick}
+      ></Grid>
     </View>
   );
 };
@@ -87,25 +103,25 @@ const MenuList = () => {
    * 编辑资料
    */
   const handleToEditInfo = () => {
-    router.push("/my/info/edit");
+    router.push("/mine/info/edit");
   };
   /**
    * 常见问题
    */
   const handleHelp = () => {
-    router.push("/my/help");
+    router.push("/mine/help");
   };
   /**
    * 关于我们
    */
   const handleAbout = () => {
-    router.push("/my/about");
+    router.push("/mine/about");
   };
   /**
    * 应用设置
    */
   const handleToSetting = () => {
-    router.push("/my/setting");
+    router.push("/mine/setting");
   };
   return (
     <View style={styles.menuList}>
@@ -149,7 +165,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    // backgroundColor: "#fff",
     // justifyContent: "center",
+  },
+  avatarBox: {
+    width: 75,
+    height: 75,
+    borderRadius: 37.5,
   },
   avatar: {
     width: 75,

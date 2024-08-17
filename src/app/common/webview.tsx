@@ -1,10 +1,9 @@
 import { WebView } from "react-native-webview";
-import Constants from "expo-constants";
 import { StyleSheet } from "react-native";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { View } from "@ant-design/react-native";
 
-export default function App() {
+export default function WebViewScreen() {
   const { url, title } = useLocalSearchParams<{ url: string; title: string }>();
   return (
     <View style={{ flex: 1 }}>

@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { Text, View, Button } from "@ant-design/react-native";
-import { useSession } from "@/src/ctx";
+import { Text, View } from "@ant-design/react-native";
 import { Image } from "react-native";
 
 export default function TabOneScreen() {
-  const { signOut } = useSession();
   return (
     <View style={styles.container}>
       <Image
@@ -13,7 +11,6 @@ export default function TabOneScreen() {
         style={styles.img}
       ></Image>
       <Text>Hello RuoYi</Text>
-      <Button onPress={signOut}>退出登录</Button>
     </View>
   );
 }
@@ -23,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
+    // backgroundColor: "#fff",
   },
   img: {
     width: 120,

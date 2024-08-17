@@ -7,6 +7,8 @@ const config = getDefaultConfig(__dirname);
 config.transformer.minifierPath = "metro-minify-terser";
 // 混淆
 // config.transformer.minifierPath = "metro-minify-uglify";
+// esbuild
+// config.transformerPath = require.resolve("metro-minify-esbuild");
 config.transformer.minifierConfig = {
   compress: {
     // 下面的选项删除生产环境中的所有控制台日志语句。

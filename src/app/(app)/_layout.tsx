@@ -41,7 +41,34 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        <Stack.Screen name="my" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="mine/about"
+          options={{ headerTitleAlign: "center", title: "关于我们" }}
+        />
+        <Stack.Screen
+          name="mine/avatar"
+          options={{ headerTitleAlign: "center", title: "修改头像" }}
+        />
+        <Stack.Screen
+          name="mine/help"
+          options={{ headerTitleAlign: "center", title: "常见问题" }}
+        />
+        <Stack.Screen
+          name="mine/password"
+          options={{ headerTitleAlign: "center", title: "修改密码" }}
+        />
+        <Stack.Screen
+          name="mine/setting"
+          options={{ headerTitleAlign: "center", title: "应用设置" }}
+        />
+        <Stack.Screen
+          name="mine/info/index"
+          options={{ headerTitleAlign: "center", title: "个人信息" }}
+        />
+        <Stack.Screen
+          name="mine/info/edit"
+          options={{ headerTitleAlign: "center", title: "编辑资料" }}
+        />
       </Stack>
     </ThemeProvider>
   );

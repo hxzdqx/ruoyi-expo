@@ -17,13 +17,15 @@ export const getToken = () => {
 /**
  * 设置token
  */
-export const setToken = (token: string) => {
-  setStorageItemAsync(TokenKey, token);
+export const setToken = async (token: string) => {
+  await setStorageItemAsync(TokenKey, token);
+  return Promise.resolve();
 };
 
 /**
  * 删除token
  */
-export const deleteToken = () => {
-  deleteStorageItemAsync(TokenKey);
+export const deleteToken = async () => {
+  await deleteStorageItemAsync(TokenKey);
+  return Promise.resolve();
 };
